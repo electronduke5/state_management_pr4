@@ -8,34 +8,37 @@ class ClickCubit extends Cubit<ClickState> {
   ClickCubit() : super(ClickInitial());
   int count = 0;
   List<String> widgetsList = <String>[];
+  static const String _textMessage = 'Counter equals 10!';
 
-  void onIncClick() {
-    count++;
+  void onIncClick(ThemeMode theme) {
+    theme == ThemeMode.light ? count++ : count += 2;
     if (count == 10) {
-      emit(ClickError(message: 'Счетчик равен 10!'));
-      widgetsList.add('Счетчик равен 10!');
+      emit(ClickError(message: _textMessage));
+      widgetsList.add(_textMessage);
       count = 0;
       return;
     }
     emit(Click(count));
-    widgetsList.add(count.toString());
+    widgetsList
+        .add('Counter = ${count.toString()}, current theme is ${theme.name}');
   }
 
-  void onDecClick() {
-    count--;
+  void onDecClick(ThemeMode theme) {
+    theme == ThemeMode.light ? count-- : count += -2;
     if (count == 10) {
-      emit(ClickError(message: 'Счетчик равен 10!'));
-      widgetsList.add('Счетчик равен 10!');
+      emit(ClickError(message: _textMessage));
+      widgetsList.add(_textMessage);
       count = 0;
       return;
     }
-    widgetsList.add(count.toString());
+    widgetsList
+        .add('Counter = ${count.toString()}, current theme is ${theme.name}');
     emit(Click(count));
   }
 
   void getThemeName(BuildContext context) {
-    widgetsList
-        .add('Текущая тема: ${context.read<ThemeCubit>().themeMode.name}');
+    widgetsList.add(
+        'Theme was switched on ${context.read<ThemeCubit>().themeMode.name}');
   }
 
   void clearLog() {

@@ -77,8 +77,9 @@ class CounterPage extends StatelessWidget {
                   Expanded(child: Container()),
                   ElevatedButton(
                     onPressed: () {
-                      context.read<ClickCubit>().onIncClick();
-                      context.read<ClickCubit>().getThemeName(context);
+                      context
+                          .read<ClickCubit>()
+                          .onIncClick(context.read<ThemeCubit>().themeMode);
                     },
                     child: const Text('+'),
                   ),
@@ -89,8 +90,9 @@ class CounterPage extends StatelessWidget {
                     builder: (context, state) {
                       return ElevatedButton(
                         onPressed: () {
-                          context.read<ClickCubit>().onDecClick();
-                          context.read<ClickCubit>().getThemeName(context);
+                          context
+                              .read<ClickCubit>()
+                              .onDecClick(context.read<ThemeCubit>().themeMode);
                         },
                         child: const Text('-'),
                       );
