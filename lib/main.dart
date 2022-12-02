@@ -86,17 +86,13 @@ class CounterPage extends StatelessWidget {
                   const SizedBox(
                     width: 20,
                   ),
-                  BlocBuilder<ClickCubit, ClickState>(
-                    builder: (context, state) {
-                      return ElevatedButton(
-                        onPressed: () {
-                          context
-                              .read<ClickCubit>()
-                              .onDecClick(context.read<ThemeCubit>().themeMode);
-                        },
-                        child: const Text('-'),
-                      );
+                  ElevatedButton(
+                    onPressed: () {
+                      context
+                          .read<ClickCubit>()
+                          .onDecClick(context.read<ThemeCubit>().themeMode);
                     },
+                    child: const Text('-'),
                   ),
                   Expanded(child: Container()),
                 ],
